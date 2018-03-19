@@ -25,6 +25,7 @@
     self.stateLabel.text = state;
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:logoUrlString]
                           placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
 }
 
 @end

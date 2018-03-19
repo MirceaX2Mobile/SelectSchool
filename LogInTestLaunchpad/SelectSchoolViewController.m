@@ -76,6 +76,12 @@
     self.schoolsTableView.dataSource = self;
     self.searchTextField.delegate = self;
     
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        NSNumber *valueLeft = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+        [[UIDevice currentDevice] setValue:valueLeft forKey:@"orientation"];
+        NSNumber *valueRight = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:valueRight forKey:@"orientation"];
+    }
     [self.schoolsTableView reloadData];
     [self loadData];
 }
@@ -176,7 +182,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120.0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return 120.0;
+    } else {
+        return 80.0;
+    }
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -193,6 +203,7 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = cell.contentView.backgroundColor;
     
     return cell;
 }
